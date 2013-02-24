@@ -5,8 +5,7 @@
     android:orientation="vertical"
     tools:context=".SendMessageActivity"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:padding="10dp" >
+    android:focusableInTouchMode="true" >
 
     <TextView
         android:layout_width="match_parent"
@@ -14,6 +13,8 @@
         android:textSize="18sp"
         android:text="Enter your state and tag ID to receive messages sent to your license plate."
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
     
     <LinearLayout
@@ -21,6 +22,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         >
         <Spinner
 	        android:id="@+id/state_spinner"
@@ -42,6 +45,8 @@
 	        />
     </LinearLayout>
     
+    <include layout="@layout/ads_banner" />
+    
     <Button
         android:id="@+id/register_tag"
         android:layout_width="match_parent"
@@ -50,6 +55,10 @@
         android:onClick="registerTag"
         style="@style/plateButtonStyle"
         android:textSize="32sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+    
+    <include layout="@layout/ads_banner" />
 
 </LinearLayout>

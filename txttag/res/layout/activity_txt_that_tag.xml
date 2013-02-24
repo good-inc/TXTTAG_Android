@@ -1,12 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SendMessageActivity"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:padding="10dp" >
+    android:focusableInTouchMode="true" >
 
     <TextView
         android:layout_width="match_parent"
@@ -14,6 +14,8 @@
         android:textSize="18sp"
         android:text="Enter a state and tag ID to send your message to a driver."
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
     <!-- 
     <TextView
@@ -36,6 +38,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         >
         <Spinner
 	        android:id="@+id/state_spinner"
@@ -64,9 +68,12 @@
         android:layout_weight="1"
         android:gravity="top|left"
         android:hint="Message"
-        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         style="@style/plateButtonStyle"
         />
+    
+    <include layout="@layout/ads_banner" />
     
     <Button
         android:id="@+id/send_txt"
@@ -76,6 +83,10 @@
         android:textStyle="bold"
         android:text="SEND TXT!"
         android:onClick="sendTxt"
-        style="@style/plateButtonStyle" />
+        style="@style/plateButtonStyle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+    
+    <include layout="@layout/ads_banner" />
 
 </LinearLayout>

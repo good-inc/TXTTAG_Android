@@ -76,10 +76,10 @@ public class SplashActivity extends Activity
 				else
 				{
 				
-					boolean connected = service.verifyConnection();
+					//boolean connected = service.verifyConnection();
 					
-					if(connected)
-					{
+					//if(connected)
+					//{
 						try {
 							Thread.sleep(5000);
 						} catch (InterruptedException e) {
@@ -89,7 +89,7 @@ public class SplashActivity extends Activity
 						Intent intent = new Intent(SplashActivity.this, SendMessageActivity.class);
 						//Intent intent = new Intent(SplashActivity.this, ViewMyMessagesActivity.class);
 						startActivity(intent);
-					}
+					//}
 				}
 			}
 			

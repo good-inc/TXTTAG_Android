@@ -9,6 +9,7 @@
         android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     
     <application
         android:allowBackup="true"
@@ -29,6 +30,7 @@
         <activity android:name="com.txttag.hackathon.android.activities.RegisterTagActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.ViewMyMessagesActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.SettingsActivity" android:launchMode="singleInstance" />
+        <activity android:name="com.google.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
     </application>
 
 </manifest>
