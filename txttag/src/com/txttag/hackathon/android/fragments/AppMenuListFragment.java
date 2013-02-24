@@ -1,9 +1,12 @@
 package com.txttag.hackathon.android.fragments;
 
 import com.txttag.hackathon.android.R;
+import com.txttag.hackathon.android.activities.AboutActivity;
+import com.txttag.hackathon.android.activities.FaqActivity;
 import com.txttag.hackathon.android.activities.RegisterTagActivity;
 import com.txttag.hackathon.android.activities.SendMessageActivity;
 import com.txttag.hackathon.android.activities.SettingsActivity;
+import com.txttag.hackathon.android.activities.TermsActivity;
 import com.txttag.hackathon.android.activities.ViewMyMessagesActivity;
 
 import android.content.Context;
@@ -40,6 +43,9 @@ public class AppMenuListFragment extends ListFragment {
 		adapter.add(new SampleItem("Register A Tag", R.drawable.ic_menu_add, new Intent(this.getActivity(), RegisterTagActivity.class)));
 		adapter.add(new SampleItem("View My Messages", R.drawable.ic_menu_friendslist, new Intent(this.getActivity(), ViewMyMessagesActivity.class)));
 		adapter.add(new SampleItem("Settings", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), SettingsActivity.class)));
+		adapter.add(new SampleItem("About", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), AboutActivity.class)));
+		adapter.add(new SampleItem("FAQ", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), FaqActivity.class)));
+		adapter.add(new SampleItem("Terms", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), TermsActivity.class)));
 		setListAdapter(adapter);
 		
 		this.getListView().setOnItemClickListener(new OnItemClickListener() {

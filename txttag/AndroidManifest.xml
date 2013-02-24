@@ -30,6 +30,9 @@
         <activity android:name="com.txttag.hackathon.android.activities.RegisterTagActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.ViewMyMessagesActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.SettingsActivity" android:launchMode="singleInstance" />
+        <activity android:name="com.txttag.hackathon.android.activities.AboutActivity" android:launchMode="singleInstance" />
+        <activity android:name="com.txttag.hackathon.android.activities.FaqActivity" android:launchMode="singleInstance" />
+        <activity android:name="com.txttag.hackathon.android.activities.TermsActivity" android:launchMode="singleInstance" />
         <activity android:name="com.google.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
     </application>
 

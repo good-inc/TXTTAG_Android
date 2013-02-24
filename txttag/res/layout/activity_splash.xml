@@ -5,31 +5,37 @@
     android:background="@drawable/splash_bk"
     tools:context=".Splash" >
 
-    
-    <ImageView
-        android:id="@+id/title_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
-        android:src="@drawable/title_text"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        android:layout_marginTop="200dp"
-        />
-    
-    <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="Tell That Truck To Move Its A$$!"
+        android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:layout_below="@id/title_text"
-        />
+        >
+	    <ImageView
+	        android:id="@+id/title_text"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:scaleType="centerInside"
+	        android:adjustViewBounds="true"
+	        android:src="@drawable/title_text"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:padding="10dp"
+	        android:layout_marginTop="0dp"
+	        />
+	    
+	    <TextView
+	        android:id="@+id/subtitle"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="#FFFFFF"
+	        android:textSize="30sp"
+	        android:textStyle="bold"
+	        android:gravity="center"
+	        android:text="Send messages via license plates"
+	        android:layout_centerInParent="true"
+	        android:layout_below="@id/title_text"
+	        />
+    </LinearLayout>
 
 </RelativeLayout>
