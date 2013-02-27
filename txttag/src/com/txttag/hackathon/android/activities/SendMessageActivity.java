@@ -2,6 +2,7 @@ package com.txttag.hackathon.android.activities;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.txttag.hackathon.android.R;
+import com.txttag.hackathon.android.app.AppUtils;
 import com.txttag.hackathon.android.net.JsonResponse;
 import com.txttag.hackathon.android.net.TxtTagService;
 
@@ -55,9 +57,11 @@ public class SendMessageActivity extends BaseActivity
 	{
 		Log.d(TAG, "Sending Txt...");
 		
-		final String state = stateSpinner.getSelectedItem().toString();
+		final String state = AppUtils.getStateCodeFromName( stateSpinner.getSelectedItem().toString() );
 		final String plate = plateInput.getText().toString();
 		final String message = messageInput.getText().toString();
+		
+		Log.d(TAG, "State: " + state);
 		
 		this.showProgressDialog("Sending Message...");
 		
@@ -120,7 +124,7 @@ public class SendMessageActivity extends BaseActivity
 		errorDialog.show(getSupportFragmentManager(), "ErrorFragment");
 	}
 	
-	private class SuccessDialogFragment extends DialogFragment
+	public class SuccessDialogFragment extends DialogFragment
 	{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)
@@ -139,7 +143,7 @@ public class SendMessageActivity extends BaseActivity
 		}
 	}
 	
-	private class NoSuccessDialogFragment extends DialogFragment
+	public class NoSuccessDialogFragment extends DialogFragment
 	{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)
@@ -158,7 +162,7 @@ public class SendMessageActivity extends BaseActivity
 		}
 	}
 	
-	private class ErrorDialogFragment extends DialogFragment
+	public class ErrorDialogFragment extends DialogFragment
 	{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)

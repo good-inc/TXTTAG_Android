@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.txttag.hackathon.android.R;
+import com.txttag.hackathon.android.app.AppUtils;
 import com.txttag.hackathon.android.net.JsonResponse;
 import com.txttag.hackathon.android.net.TxtTagService;
 
@@ -105,8 +106,10 @@ public class RegisterTagActivity extends BaseActivity
 	{
 		Log.d(TAG, "Registering Tag...");
 		
-		final String state = stateSpinner.getSelectedItem().toString();
+		final String state = AppUtils.getStateCodeFromName( stateSpinner.getSelectedItem().toString() );
 		final String plate = plateInput.getText().toString();
+		
+		Log.d(TAG, "tag: " + state);
 		
 		this.showProgressDialog("Registering Tag...");
 		
