@@ -27,9 +27,19 @@ public class AppUtils
 		return stateCodesList.get(index);
 	}
 	
+	public static int getStateIndexFromName(String stateName)
+	{
+		return stateNamesList.indexOf(stateName);
+	}
+	
 	public static String getStateNameFromCode(String stateCode)
 	{
-		int index = stateCodesList.indexOf(stateCode);
+		int index = stateCodesList.indexOf(stateCode.toUpperCase());
 		return stateNamesList.get(index);
+	}
+	
+	public static int getStateIndexFromCode(String stateCode)
+	{
+		return stateCodesList.indexOf(stateCode.toUpperCase());
 	}
 }

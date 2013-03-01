@@ -3,6 +3,7 @@ package com.txttag.hackathon.android.fragments;
 import com.txttag.hackathon.android.R;
 import com.txttag.hackathon.android.activities.AboutActivity;
 import com.txttag.hackathon.android.activities.FaqActivity;
+import com.txttag.hackathon.android.activities.FeedbackActivity;
 import com.txttag.hackathon.android.activities.RegisterTagActivity;
 import com.txttag.hackathon.android.activities.SendMessageActivity;
 import com.txttag.hackathon.android.activities.SettingsActivity;
@@ -46,6 +47,7 @@ public class AppMenuListFragment extends ListFragment {
 		adapter.add(new SampleItem("About", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), AboutActivity.class)));
 		adapter.add(new SampleItem("FAQ", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), FaqActivity.class)));
 		adapter.add(new SampleItem("Terms", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), TermsActivity.class)));
+		adapter.add(new SampleItem("Feedback", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), FeedbackActivity.class)));
 		setListAdapter(adapter);
 		
 		this.getListView().setOnItemClickListener(new OnItemClickListener() {

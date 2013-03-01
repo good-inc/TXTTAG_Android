@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
@@ -32,7 +33,8 @@ public class SettingsActivity extends BaseActivity
 	private static final String TAG = "SettingsActivity";
 
 	private EditText emailInput;
-	private RadioButton publicMessagesInput;
+	private CheckBox publicMessagesInput;
+	private CheckBox sendToSimilarPlatesInput;
 	private Button saveButton;
 	
 	private LinearLayout tagList;
@@ -51,7 +53,8 @@ public class SettingsActivity extends BaseActivity
 		setContentView(R.layout.activity_settings);
 		
 		emailInput = (EditText)findViewById(R.id.email);
-		publicMessagesInput = (RadioButton)findViewById(R.id.public_messages);
+		publicMessagesInput = (CheckBox)findViewById(R.id.public_messages);
+		sendToSimilarPlatesInput = (CheckBox)findViewById(R.id.send_to_similar_plates);
 		saveButton = (Button)findViewById(R.id.save);
 		
 		tagList = (LinearLayout)findViewById(R.id.tag_list);

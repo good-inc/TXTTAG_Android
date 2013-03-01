@@ -28,11 +28,20 @@
 	    android:layout_marginBottom="20dp"
 	    />
    
-   <RadioButton 
+   <CheckBox 
        android:id="@+id/public_messages"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:text="Make my messages public"
+       android:textColor="#0088FF"
+       android:layout_marginBottom="20dp"
+       />
+   
+   <CheckBox 
+       android:id="@+id/send_to_similar_plates"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Send my messages to similar plates"
        android:textColor="#0088FF"
        android:layout_marginBottom="20dp"
        />

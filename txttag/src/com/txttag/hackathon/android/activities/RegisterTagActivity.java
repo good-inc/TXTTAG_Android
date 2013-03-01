@@ -1,5 +1,6 @@
 package com.txttag.hackathon.android.activities;
 
+import java.io.IOException;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -7,6 +8,10 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
@@ -34,6 +39,9 @@ public class RegisterTagActivity extends BaseActivity
 	private DialogFragment noSuccessDialog = new NoSuccessDialogFragment();
 	private DialogFragment errorDialog = new ErrorDialogFragment();
 	
+	private LocationManager locationManager;
+	private Geocoder geocoder;
+	
 	private String receivedMessage = "";
 	
 	public RegisterTagActivity() {
@@ -53,13 +61,28 @@ public class RegisterTagActivity extends BaseActivity
 		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		stateSpinner.setAdapter(spinnerAdapter);
 		
-		
+		locationManager = (LocationManager)this.getSystemService(LOCATION_SERVICE);
+		geocoder = new Geocoder(this);
 	}
 	
 	@Override
 	protected void onResume()
 	{
 		super.onResume();
+		
+		//Log.d(TAG, "Getting location...");
+		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		try {
+			List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+			//Log.d(TAG, "Address: " + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea());
+			//Log.d(TAG, "State index: " + AppUtils.getStateIndexFromName(addresses.get(0).getAdminArea()));
+			stateSpinner.setSelection(AppUtils.getStateIndexFromName(addresses.get(0).getAdminArea()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Log.d(TAG, "Done getting location.");
+		
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		String email = prefs.getString("email", null);
