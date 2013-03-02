@@ -21,6 +21,7 @@ import android.widget.Spinner;
 
 import com.txttag.hackathon.android.R;
 import com.txttag.hackathon.android.app.AppUtils;
+import com.txttag.hackathon.android.models.MessageSentConfirmation;
 import com.txttag.hackathon.android.net.JsonResponse;
 import com.txttag.hackathon.android.net.TxtTagService;
 
@@ -99,7 +100,7 @@ public class SendMessageActivity extends BaseActivity
 			public void run() {
 				TxtTagService service = new TxtTagService();
 				
-				final JsonResponse<Object> response = service.sendMessage(state, plate, message);
+				final JsonResponse<MessageSentConfirmation> response = service.sendMessage(state, plate, message);
 				
 				runOnUiThread(new Runnable() {
 

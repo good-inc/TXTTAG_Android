@@ -25,7 +25,7 @@ import android.util.Log;
 public class ServerCommunicator 
 {
 	private static final String TAG = "ServerCommunicator";
-	private static final String URL = "http://hack.txttag.me/mattcarrol/";
+	private static final String URL = "http://dev.txttag.me/";//"http://hack.txttag.me/mattcarrol/";
 	private static ServerCommunicator instance;
 	public static ServerCommunicator getInstance()
 	{

@@ -66,90 +66,96 @@ public class SettingsActivity extends BaseActivity
 	{
 		super.onResume();
 		
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		syncUiStateWithCurrentData();
+	}
+	
+	private void syncUiStateWithCurrentData()
+	{
+		// Update UI fields with current user preferences
+		emailInput.setText(UserInfo.getEmailOrBlank());
+		publicMessagesInput.setChecked(UserInfo.getShareMessagesPreference());
+		sendToSimilarPlatesInput.setChecked(UserInfo.getSendToSimilarPlatesPreference());
 		
-		emailInput.setText(prefs.getString("email", ""));
-		publicMessagesInput.setChecked(prefs.getBoolean("public_messages", false));
-		
-		if(UserInfo.allTags.size() == 0)
-		{
-			tagList.removeAllViews();
-			tagList.addView(noTags);
-		}
+		// Update tag selection view with current user data
+		if(UserInfo.ownsTags())
+			buildTagsView();
 		else
-		{
-			tagList.removeAllViews();
-			
-			tagRadios = new ArrayList<RadioButton>();
-			for(Tag tag : UserInfo.allTags)
-			{
-				View radioLayout = this.getLayoutInflater().inflate(R.layout.tag_radio, null);
-				RadioButton radio = (RadioButton)radioLayout.findViewById(R.id.tag_radio);
+			showEmptyTagsView();
+	}
+	
+	private RadioButton createRadioButtonView(String text, boolean isSelected)
+	{
+		View radioLayout = this.getLayoutInflater().inflate(R.layout.tag_radio, null);
+		RadioButton radio = (RadioButton)radioLayout.findViewById(R.id.tag_radio);
+		
+		radio.setText(text);
+		radio.setChecked(isSelected);
+		
+		radio.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				RadioButton radio = (RadioButton) view;
 				
-				radio.setText(tag.state + ": " + tag.plate);
+				if(radio == activeRadio)
+					return;
 				
-				if(tag.state == UserInfo.activeTag.state && tag.plate == UserInfo.activeTag.plate)
+				radio.setChecked(true);
+				
+				for(RadioButton button : tagRadios)
 				{
-					radio.setChecked(true);
-					activeRadio = radio;
-				}
-				
-				tagRadios.add(radio);
-				tagList.addView(radio);
-				
-				radio.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View view) {
-						RadioButton radio = (RadioButton) view;
-						
-						if(radio == activeRadio)
-							return;
-						
-						radio.setChecked(true);
-						
-						for(RadioButton button : tagRadios)
-						{
-							if(button != radio)
-							{
-								button.setChecked(false);
-							}
-						}
-						activeRadio = (RadioButton)radio;
-						int index = tagRadios.indexOf(activeRadio);
-						
-						UserInfo.activeTag = UserInfo.allTags.get(index);
-						PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this).edit().putString("activeState", UserInfo.activeTag.state).putString("activePlate", UserInfo.activeTag.plate).commit();
+					if(button != radio)
+					{
+						button.setChecked(false);
 					}
-					
-				});
-
+				}
+				activeRadio = (RadioButton)radio;
+				int index = tagRadios.indexOf(activeRadio);
+				
+				UserInfo.setActiveTag( UserInfo.getAllTags().get(index) );
 			}
 			
-			if(activeRadio == null)
-			{
-				activeRadio = tagRadios.get(0);
-				tagRadios.get(0).setChecked(true);
-				UserInfo.activeTag = UserInfo.allTags.get(0);
-				PreferenceManager.getDefaultSharedPreferences(this).edit().putString("activeState", UserInfo.activeTag.state).putString("activePlate", UserInfo.activeTag.plate).commit();
-			}
+		});
+		
+		return radio;
+	}
+	
+	private void buildTagsView()
+	{
+		List<Tag> allTags = UserInfo.getAllTags();
+		
+		tagList.removeAllViews();
+		
+		tagRadios = new ArrayList<RadioButton>();
+		for(Tag tag : allTags)
+		{
+			RadioButton radio = createRadioButtonView(tag.state + ": " + tag.plate, tag.equals(UserInfo.getActiveTag()));
+			if(radio.isChecked())
+				activeRadio = radio;
+			
+			tagRadios.add(radio);
+			tagList.addView(radio);
 		}
+		
+		if(activeRadio == null)
+		{
+			activeRadio = tagRadios.get(0);
+			tagRadios.get(0).setChecked(true);
+			UserInfo.setActiveTag( allTags.get(0) );
+		}
+	}
+	
+	private void showEmptyTagsView()
+	{
+		tagList.removeAllViews();
+		tagList.addView(noTags);
 	}
 	
 	public void saveSettings(View view)
 	{
-		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-		
-		if(emailInput.getText().toString().length() > 0)
-		{
-			editor.putString("email", emailInput.getText().toString());
-		}
-		
-		editor.putBoolean("public_messages", publicMessagesInput.isChecked());
-		
-		editor.commit();
-		
-		
+		UserInfo.setEmail(emailInput.getText().toString());
+		UserInfo.setShareMessagesPreference(publicMessagesInput.isChecked());
+		UserInfo.setSendToSimilarPlatesPreference(sendToSimilarPlatesInput.isChecked());
 	}
 	
 }

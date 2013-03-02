@@ -145,7 +145,7 @@ public class ViewMyMessagesActivity extends BaseActivity
 				//messages.clear();
 				//messages.addAll( service.getMessages() );
 				Log.d(TAG, "Gettings messages for " + UserInfo.activeTag.state + ": " + UserInfo.activeTag.plate);
-				final List<TagMessage> allMessages = service.getMessages(UserInfo.activeTag.state, UserInfo.activeTag.plate);
+				final List<TagMessage> allMessages = service.getMessages(UserInfo.activeTag.state, UserInfo.activeTag.plate, UserInfo.getEmail());
 				runOnUiThread(new Runnable() {
 
 					@Override

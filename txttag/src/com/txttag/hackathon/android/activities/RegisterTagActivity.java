@@ -142,7 +142,7 @@ public class RegisterTagActivity extends BaseActivity
 			public void run() {
 				TxtTagService service = new TxtTagService();
 				
-				final JsonResponse<Object> response = service.registerTag(state, plate, email);
+				final JsonResponse<Object> response = service.registerTag(state, plate, email, true, true, true);
 				
 				runOnUiThread(new Runnable() {
 
