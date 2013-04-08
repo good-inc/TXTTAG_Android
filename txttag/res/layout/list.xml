@@ -20,4 +20,14 @@
 	    android:paddingLeft="0dp"
 	    android:paddingRight="0dp"
 	    android:overScrollFooter="@null" />
+	<TextView 
+	    android:id="@+id/stats"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="10dp"
+	    android:lines="1"
+	    android:background="#000088"
+	    android:textColor="#FFFFFF"
+	    android:textSize="14sp"
+	    android:text="Stats: 54 Users, 1239 Messages"/>
 </LinearLayout>

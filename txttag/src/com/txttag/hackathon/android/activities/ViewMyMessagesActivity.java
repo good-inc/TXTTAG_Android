@@ -110,6 +110,10 @@ public class ViewMyMessagesActivity extends BaseActivity
 	
 	private void refreshData()
 	{
+		this.showProgressDialog("Loading Messages");
+		
+		messages.clear();
+		
 		(new Thread(new Runnable() {
 
 			@Override
@@ -121,10 +125,11 @@ public class ViewMyMessagesActivity extends BaseActivity
 				//String state = prefs.getString("state", null);
 				//String plate = prefs.getString("plate", null);
 				
-				if(UserInfo.activeTag == null)
+				if(UserInfo.getActiveTag() == null)
 				{
 					runOnUiThread(new Runnable() {
 						public void run() {
+							ViewMyMessagesActivity.this.hideProgressDialog();
 							AlertDialog.Builder builder = new AlertDialog.Builder(ViewMyMessagesActivity.this);
 							builder.setMessage("We don't have a state and plate on file for you.  Please be sure to claim a tag so that you can view messages.")
 							.setNeutralButton("Ok", new OnClickListener() {
@@ -144,28 +149,29 @@ public class ViewMyMessagesActivity extends BaseActivity
 				
 				//messages.clear();
 				//messages.addAll( service.getMessages() );
-				Log.d(TAG, "Gettings messages for " + UserInfo.activeTag.state + ": " + UserInfo.activeTag.plate);
-				final List<TagMessage> allMessages = service.getMessages(UserInfo.activeTag.state, UserInfo.activeTag.plate, UserInfo.getEmail());
+				Log.d(TAG, "Gettings messages for " + UserInfo.getActiveTag().state + ": " + UserInfo.getActiveTag().plate);
+				final List<TagMessage> allMessages = service.getMessages(UserInfo.getActiveTag().state, UserInfo.getActiveTag().plate, UserInfo.getEmail());
 				runOnUiThread(new Runnable() {
 
 					@Override
 					public void run() {
-						messages.clear();
+						ViewMyMessagesActivity.this.hideProgressDialog();
+						
 						messages.addAll(allMessages);
 						adapter.notifyDataSetChanged();
 						
 						pullList.onRefreshComplete();
 						
-//						if(messages.size() > 0)
-//						{
-//							pullList.setVisibility(View.VISIBLE);
-//							emptyDisplay.setVisibility(View.INVISIBLE);
-//						}
-//						else
-//						{
-//							pullList.setVisibility(View.INVISIBLE);
-//							emptyDisplay.setVisibility(View.VISIBLE);
-//						}
+						if(messages.size() > 0)
+						{
+							pullList.setVisibility(View.VISIBLE);
+							emptyDisplay.setVisibility(View.INVISIBLE);
+						}
+						else
+						{
+							pullList.setVisibility(View.INVISIBLE);
+							emptyDisplay.setVisibility(View.VISIBLE);
+						}
 					}
 					
 				});

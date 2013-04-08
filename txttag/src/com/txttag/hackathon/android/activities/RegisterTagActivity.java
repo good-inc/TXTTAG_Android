@@ -134,6 +134,8 @@ public class RegisterTagActivity extends BaseActivity
 		
 		Log.d(TAG, "tag: " + state);
 		
+		hideKeyboard();
+		
 		this.showProgressDialog("Registering Tag...");
 		
 		(new Thread(new Runnable() {
@@ -142,7 +144,7 @@ public class RegisterTagActivity extends BaseActivity
 			public void run() {
 				TxtTagService service = new TxtTagService();
 				
-				final JsonResponse<Object> response = service.registerTag(state, plate, email, true, true, true);
+				final JsonResponse<Object> response = service.registerTag(state, plate, email, true, true);
 				
 				runOnUiThread(new Runnable() {
 
@@ -161,6 +163,8 @@ public class RegisterTagActivity extends BaseActivity
 							editor.putString("state", state);
 							editor.putString("plate", plate);
 							editor.commit();
+							
+							plateInput.setText("");
 							
 							showSuccessMessage();
 						}

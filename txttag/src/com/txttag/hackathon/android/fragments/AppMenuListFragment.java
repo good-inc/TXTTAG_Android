@@ -9,6 +9,7 @@ import com.txttag.hackathon.android.activities.SendMessageActivity;
 import com.txttag.hackathon.android.activities.SettingsActivity;
 import com.txttag.hackathon.android.activities.TermsActivity;
 import com.txttag.hackathon.android.activities.ViewMyMessagesActivity;
+import com.txttag.hackathon.android.app.TxtTagStats;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,9 +31,15 @@ public class AppMenuListFragment extends ListFragment {
 	private static final String TAG = "AppMenuListFragment";
 	
 	private SampleAdapter adapter;
+	private TextView stats;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.list, null);
+		ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.list, null);
+		
+		stats = (TextView) layout.findViewById(R.id.stats);
+		stats.setText("Stats: " + TxtTagStats.getInstance().getNumTags() + " Users, " + TxtTagStats.getInstance().getNumMessages() + " Messages");
+		
+		return layout;
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -56,7 +63,6 @@ public class AppMenuListFragment extends ListFragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				startActivity(adapter.getItem(position).clickAction);
 			}
-			
 		});
 		
 	}

@@ -92,6 +92,8 @@ public class SendMessageActivity extends BaseActivity
 		
 		Log.d(TAG, "State: " + state);
 		
+		hideKeyboard();
+		
 		this.showProgressDialog("Sending Message...");
 		
 		(new Thread(new Runnable() {

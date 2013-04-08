@@ -54,7 +54,27 @@ public class SettingsActivity extends BaseActivity
 		
 		emailInput = (EditText)findViewById(R.id.email);
 		publicMessagesInput = (CheckBox)findViewById(R.id.public_messages);
+		publicMessagesInput.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				Log.d(TAG, "Change to public messages setting: " + isChecked);
+				
+				saveSettings(null);
+			}
+			
+		});
 		sendToSimilarPlatesInput = (CheckBox)findViewById(R.id.send_to_similar_plates);
+		sendToSimilarPlatesInput.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				Log.d(TAG, "Change to public messages setting: " + isChecked);
+				
+				saveSettings(null);
+			}
+			
+		});
 		saveButton = (Button)findViewById(R.id.save);
 		
 		tagList = (LinearLayout)findViewById(R.id.tag_list);
@@ -66,7 +86,36 @@ public class SettingsActivity extends BaseActivity
 	{
 		super.onResume();
 		
-		syncUiStateWithCurrentData();
+		refreshData();
+	}
+	
+	private void refreshData()
+	{
+		this.showProgressDialog("Loading Your Tags");
+		
+		(new Thread(new Runnable() 
+		{
+
+			@Override
+			public void run() 
+			{
+				UserInfo.refreshUserData();
+				
+				runOnUiThread(new Runnable() 
+				{
+
+					@Override
+					public void run() 
+					{
+						syncUiStateWithCurrentData();
+						SettingsActivity.this.hideProgressDialog();
+					}
+					
+				});
+				
+			}
+			
+		})).start();
 	}
 	
 	private void syncUiStateWithCurrentData()
@@ -81,6 +130,7 @@ public class SettingsActivity extends BaseActivity
 			buildTagsView();
 		else
 			showEmptyTagsView();
+		
 	}
 	
 	private RadioButton createRadioButtonView(String text, boolean isSelected)
@@ -153,9 +203,16 @@ public class SettingsActivity extends BaseActivity
 	
 	public void saveSettings(View view)
 	{
+		Log.d(TAG,"Saving new settings");
+		Log.d(TAG," - email: " + emailInput.getText().toString());
+		Log.d(TAG," - public messages: " + publicMessagesInput.isChecked());
+		Log.d(TAG," - similar messages: " + sendToSimilarPlatesInput.isChecked());
+		
 		UserInfo.setEmail(emailInput.getText().toString());
 		UserInfo.setShareMessagesPreference(publicMessagesInput.isChecked());
 		UserInfo.setSendToSimilarPlatesPreference(sendToSimilarPlatesInput.isChecked());
+		
+		refreshData();
 	}
 	
 }

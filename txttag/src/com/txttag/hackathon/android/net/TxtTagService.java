@@ -166,6 +166,7 @@ public class TxtTagService
 		try {
 			Log.d(TAG, "Gettings tags.");
 			Map<String, String> params = new HashMap<String, String>();
+			params.put("action", "list");
 			params.put("email", email);
 			String response = ServerCommunicator.getInstance().makePostRequest(uri, params);
 			
@@ -174,6 +175,9 @@ public class TxtTagService
 			JsonResponse<List<Tag>> jsonResponse = gson.fromJson(response, responseType);
 			
 			Log.d(TAG, "Json Response: " + jsonResponse.toString());
+			
+			if(!jsonResponse.success)
+				return new ArrayList<Tag>();
 			
 			return jsonResponse.data;
 		} catch (IOException e) {
@@ -214,12 +218,12 @@ public class TxtTagService
 	 */
 	public List<TagMessage> getMessages(String state, String plate, String email)
 	{
-		String uri = String.format("process_json");
+		String uri = String.format("process_json.php");
 		
 		try {
 			Log.d(TAG, "Retrieving messages.");
 			Map<String, String> params = new HashMap<String, String>();
-			params.put("action", "text");
+			params.put("action", "view");
 			params.put("state", state);
 			params.put("plate", plate);
 			String response = ServerCommunicator.getInstance().makePostRequest(uri, params);
@@ -229,6 +233,9 @@ public class TxtTagService
 			JsonResponse<List<TagMessage>> jsonResponse = gson.fromJson(response, responseType);
 			
 			Log.d(TAG, "Json Response: " + jsonResponse.toString());
+			
+			if(!jsonResponse.success)
+				return new ArrayList<TagMessage>();
 			
 			return jsonResponse.data;
 		} catch (IOException e) {
@@ -313,7 +320,7 @@ public class TxtTagService
 	 * @param plate
 	 * @return
 	 */
-	public boolean sendFeedback(String email, String userName, String message)
+	public boolean sendFeedback(String email, String fullName, String message)
 	{
 		String uri = String.format("process_json.php");
 		
@@ -322,7 +329,7 @@ public class TxtTagService
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("action", "contact");
 			params.put("email", email);
-			params.put("name", userName);
+			params.put("name", fullName);
 			params.put("text", message);
 			String response = ServerCommunicator.getInstance().makePostRequest(uri, params);
 			
@@ -361,7 +368,7 @@ public class TxtTagService
 	 * @param plate
 	 * @return
 	 */
-	public JsonResponse<ServiceStats> getServiceStats()
+	public ServiceStats getServiceStats()
 	{
 		String uri = String.format("process_json.php");
 		
@@ -377,7 +384,7 @@ public class TxtTagService
 			
 			Log.d(TAG, "Json Response: " + jsonResponse.toString());
 			
-			return jsonResponse;
+			return jsonResponse.data;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

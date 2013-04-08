@@ -12,9 +12,11 @@ import com.txttag.hackathon.android.net.TxtTagService;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
 
 public class BaseActivity extends SlidingFragmentActivity 
 {
@@ -60,22 +62,52 @@ public class BaseActivity extends SlidingFragmentActivity
 		this.getSlidingMenu().showContent();
 	}
 	
-	protected void showProgressDialog(String msg)
+	protected void showProgressDialog(final String msg)
 	{
-		if(waitDialog == null)
+		runOnUiThread(new Runnable() 
 		{
-			waitDialog = new ProgressDialog(this);
-			waitDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-			waitDialog.setCancelable(false);
-		}
+			@Override
+			public void run() {
+				if(waitDialog == null)
+				{
+					waitDialog = new ProgressDialog(BaseActivity.this);
+					waitDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+					waitDialog.setCancelable(false);
+				}
+				
+				waitDialog.setMessage(msg);
+				waitDialog.show();
+			}
 		
-		waitDialog.setMessage(msg);
-		waitDialog.show();
+		});
 	}
 	
 	protected void hideProgressDialog()
 	{
-		waitDialog.hide();
+		runOnUiThread(new Runnable() 
+		{
+			@Override
+			public void run() {
+				if(waitDialog != null)
+					waitDialog.hide();
+			}
+		
+		});
+	}
+	
+	protected void showKeyboard()
+	{
+		
+	}
+	
+	protected void hideKeyboard()
+	{
+		if(this.getCurrentFocus() == null)
+			return;
+		
+		InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+		
+		inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 	}
 
 	/*

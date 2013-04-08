@@ -25,7 +25,7 @@ import android.util.Log;
 public class ServerCommunicator 
 {
 	private static final String TAG = "ServerCommunicator";
-	private static final String URL = "http://dev.txttag.me/";//"http://hack.txttag.me/mattcarrol/";
+	private static final String URL = "http://dev.txttag.me/includes/";//"http://hack.txttag.me/mattcarrol/";
 	private static ServerCommunicator instance;
 	public static ServerCommunicator getInstance()
 	{
@@ -61,6 +61,7 @@ public class ServerCommunicator
 	public String makePostRequest(String uri, Map<String,String> params) throws IOException
 	{
 		String getMessagesUrl = URL + uri;
+		Log.d(TAG, "Messages URL: " + getMessagesUrl);
 		HttpPost request = new HttpPost(getMessagesUrl);
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(params.size());

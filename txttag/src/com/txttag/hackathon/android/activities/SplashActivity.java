@@ -1,5 +1,6 @@
 package com.txttag.hackathon.android.activities;
 import com.txttag.hackathon.android.R;
+import com.txttag.hackathon.android.app.TxtTagStats;
 import com.txttag.hackathon.android.app.UserInfo;
 
 import android.app.Activity;
@@ -51,16 +52,26 @@ public class SplashActivity extends Activity
 		
 		private void waitAndStartApp()
 		{
-			// Wait a few seconds to leave splash screen up
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			Intent intent = new Intent(SplashActivity.this, SendMessageActivity.class);
-			startActivity(intent);
+			(new Thread(new Runnable()
+			{
+				@Override
+				public void run() 
+				{
+					TxtTagStats.getInstance().refresh();
+					
+					// Wait a few seconds to leave splash screen up
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					Intent intent = new Intent(SplashActivity.this, SendMessageActivity.class);
+					startActivity(intent);
+				}
+				
+			})).start();	
 		}
 	}
 	

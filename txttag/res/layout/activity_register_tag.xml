@@ -40,6 +40,8 @@
 	        android:layout_height="wrap_content"
 	        android:hint="Tag"
 	        android:maxLength="8"
+	        android:singleLine="true"
+	        android:ellipsize="end"
 	        android:textAllCaps="true"
 	        style="@style/plateButtonStyle"
 	        />
@@ -59,6 +61,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
     
-    <include layout="@layout/ads_banner" />
+    <!-- <include layout="@layout/ads_banner" />  -->
 
 </LinearLayout>
