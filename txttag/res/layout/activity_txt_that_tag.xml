@@ -6,96 +6,80 @@
     android:fillViewport="true"
     tools:context=".SendMessageActivity"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+	android:focusableInTouchMode="true"
+    >
+    
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    android:orientation="vertical"
-     >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="Enter a state and tag ID to send your message to a driver."
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        />
-    <!-- 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" - Enter The Tag"
-        android:layout_marginBottom="10dp"
-        />
-    
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" - Say Whatever You Would Like"
-        android:layout_marginBottom="10dp"
-        />
-    -->
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        >
-        <Spinner
-	        android:id="@+id/state_spinner"
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
+	    android:orientation="vertical">
+        
+	    <TextView
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_marginRight="5dp"
-	        style="@style/plateButtonStyle"
-	        android:background="@drawable/spinner_bk"/>
-        <EditText
-	        android:id="@+id/tag"
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
+	        android:textSize="18sp"
+	        android:text="Enter a state and tag ID to send your message to a driver."
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        />
+	    
+	    <LinearLayout
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:maxLength="8"
-	        android:singleLine="true"
-	        android:ellipsize="end"
-	        android:textAllCaps="true"
-	        android:hint="Tag"
+	        android:orientation="horizontal"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        >
+	        <Spinner
+		        android:id="@+id/state_spinner"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="wrap_content"
+		        android:layout_marginRight="5dp"
+		        style="@style/plateButtonStyle"
+		        android:background="@drawable/spinner_bk"/>
+	        <EditText
+		        android:id="@+id/tag"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="wrap_content"
+		        android:maxLength="8"
+		        android:singleLine="true"
+		        android:ellipsize="end"
+		        android:textAllCaps="true"
+		        android:hint="Tag"
+		        style="@style/plateButtonStyle"
+		        />
+	    </LinearLayout>
+	    
+	    <EditText
+	        android:id="@+id/message"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:minLines="3"
+	        android:gravity="top|left"
+	        android:hint="Message"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
 	        style="@style/plateButtonStyle"
 	        />
-    </LinearLayout>
-    
-    <EditText
-        android:id="@+id/message"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:minLines="3"
-        android:gravity="top|left"
-        android:hint="Message"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        style="@style/plateButtonStyle"
-        />
-    
-    <include layout="@layout/ads_banner" />
-    
-    <Button
-        android:id="@+id/send_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:text="SEND TXT!"
-        android:onClick="sendTxt"
-        style="@style/plateButtonStyle"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
-    
-    <!-- <include layout="@layout/ads_banner" /> -->
-
-</LinearLayout>
+	    
+	    <include layout="@layout/ads_banner" />
+	    
+	    <Button
+	        android:id="@+id/send_txt"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="32sp"
+	        android:textStyle="bold"
+	        android:text="SEND TXT!"
+	        android:onClick="sendTxt"
+	        style="@style/plateButtonStyle"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp" />
+	
+	</LinearLayout>
 </ScrollView>

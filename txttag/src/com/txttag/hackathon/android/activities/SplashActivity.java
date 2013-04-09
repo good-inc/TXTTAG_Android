@@ -61,7 +61,7 @@ public class SplashActivity extends Activity
 					
 					// Wait a few seconds to leave splash screen up
 					try {
-						Thread.sleep(5000);
+						Thread.sleep(3000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

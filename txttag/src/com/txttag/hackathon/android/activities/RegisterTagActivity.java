@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
@@ -192,31 +193,47 @@ public class RegisterTagActivity extends BaseActivity
 	
 	public void showSuccessMessage()
 	{
-		successDialog.show(getSupportFragmentManager(), "SuccessFragment");
+		SuccessDialogFragment dialog = new SuccessDialogFragment();
+		Bundle b = new Bundle();
+		b.putString("receivedMessage", receivedMessage);
+		dialog.setArguments(b);
+		dialog.show(getSupportFragmentManager(), "fragment_show_success");
+		
+		//successDialog.show(getSupportFragmentManager(), "SuccessFragment");
 	}
 
 	public void showUnsuccessfulMessage()
 	{
-		noSuccessDialog.show(getSupportFragmentManager(), "NoSuccessFragment");
+		NoSuccessDialogFragment dialog = new NoSuccessDialogFragment();
+		Bundle b = new Bundle();
+		b.putString("receivedMessage", receivedMessage);
+		dialog.setArguments(b);
+		dialog.show(getSupportFragmentManager(), "fragment_show_no_success");
+		//noSuccessDialog.show(getSupportFragmentManager(), "NoSuccessFragment");
 	}
 	
 	public void showCommunicationErrorMessage()
 	{
-		errorDialog.show(getSupportFragmentManager(), "ErrorFragment");
+		ErrorDialogFragment dialog = new ErrorDialogFragment();
+		dialog.show(getSupportFragmentManager(), "fragment_show_error");
+		//errorDialog.show(getSupportFragmentManager(), "ErrorFragment");
 	}
 	
-	private class SuccessDialogFragment extends DialogFragment
+	public static class SuccessDialogFragment extends DialogFragment
 	{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)
 		{
-			AlertDialog.Builder builder = new AlertDialog.Builder(RegisterTagActivity.this);
-			builder.setMessage(receivedMessage)
+			AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+			builder.setMessage(this.getArguments().getString("receivedMessage"))
 				.setNeutralButton("Cool", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Log.d(TAG, "Done sending message. Going home.");
+						
+						Intent settingsIntent = new Intent(SuccessDialogFragment.this.getActivity(), SettingsActivity.class);
+						SuccessDialogFragment.this.getActivity().startActivity(settingsIntent);
 					}
 				});
 			
@@ -224,13 +241,13 @@ public class RegisterTagActivity extends BaseActivity
 		}
 	}
 	
-	private class NoSuccessDialogFragment extends DialogFragment
+	public static class NoSuccessDialogFragment extends DialogFragment
 	{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)
 		{
-			AlertDialog.Builder builder = new AlertDialog.Builder(RegisterTagActivity.this);
-			builder.setMessage("Error Registering Tag: " + '\n' + receivedMessage)
+			AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+			builder.setMessage("Error Registering Tag: " + '\n' + this.getArguments().getString("receivedMessage"))
 				.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
 					
 					@Override
@@ -243,12 +260,12 @@ public class RegisterTagActivity extends BaseActivity
 		}
 	}
 	
-	private class ErrorDialogFragment extends DialogFragment
+	public static class ErrorDialogFragment extends DialogFragment
 	{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)
 		{
-			AlertDialog.Builder builder = new AlertDialog.Builder(RegisterTagActivity.this);
+			AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
 			builder.setMessage("There was an error communicating with the server.  Please try again.")
 				.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
 					

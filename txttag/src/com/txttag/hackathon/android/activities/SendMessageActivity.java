@@ -14,7 +14,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,10 +35,6 @@ public class SendMessageActivity extends BaseActivity
 	private ArrayAdapter<CharSequence> spinnerAdapter;
 	private EditText plateInput;
 	private EditText messageInput;
-	
-	private DialogFragment successDialog = new SuccessDialogFragment();
-	private DialogFragment noSuccessDialog = new NoSuccessDialogFragment();
-	private DialogFragment errorDialog = new ErrorDialogFragment();
 	
 	private LocationManager locationManager;
 	private Geocoder geocoder;
@@ -63,12 +61,15 @@ public class SendMessageActivity extends BaseActivity
 		
 		locationManager = (LocationManager)this.getSystemService(LOCATION_SERVICE);
 		geocoder = new Geocoder(this);
+
 	}
 	
 	@Override
 	protected void onResume()
 	{
 		super.onResume();
+		
+		
 		
 		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		try {
@@ -142,25 +143,35 @@ public class SendMessageActivity extends BaseActivity
 	
 	public void showSuccessMessage()
 	{
-		successDialog.show(getSupportFragmentManager(), "SuccessFragment");
+		SuccessDialogFragment dialog = new SuccessDialogFragment();
+		dialog.show(getSupportFragmentManager(), "fragment_show_success");
+		
+		//successDialog.show(getSupportFragmentManager(), "SuccessFragment");
 	}
 
 	public void showUnsuccessfulMessage()
 	{
-		noSuccessDialog.show(getSupportFragmentManager(), "NoSuccessFragment");
+		NoSuccessDialogFragment dialog = new NoSuccessDialogFragment();
+		Bundle b = new Bundle();
+		b.putString("error", sendError);
+		dialog.setArguments(b);
+		dialog.show(getSupportFragmentManager(), "fragment_show_no_success");
+		//noSuccessDialog.show(getSupportFragmentManager(), "NoSuccessFragment");
 	}
 	
 	public void showCommunicationErrorMessage()
 	{
-		errorDialog.show(getSupportFragmentManager(), "ErrorFragment");
+		ErrorDialogFragment dialog = new ErrorDialogFragment();
+		dialog.show(getSupportFragmentManager(), "fragment_show_error");
+		//errorDialog.show(getSupportFragmentManager(), "ErrorFragment");
 	}
 	
-	public class SuccessDialogFragment extends DialogFragment
+	public static class SuccessDialogFragment extends DialogFragment
 	{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)
 		{
-			AlertDialog.Builder builder = new AlertDialog.Builder(SendMessageActivity.this);
+			AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
 			builder.setMessage("Txt Sent Successfully!")
 				.setNeutralButton("Cool", new DialogInterface.OnClickListener() {
 					
@@ -174,13 +185,14 @@ public class SendMessageActivity extends BaseActivity
 		}
 	}
 	
-	public class NoSuccessDialogFragment extends DialogFragment
+	public static class NoSuccessDialogFragment extends DialogFragment
 	{
+		
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)
 		{
-			AlertDialog.Builder builder = new AlertDialog.Builder(SendMessageActivity.this);
-			builder.setMessage("Error Sending Txt: " + '\n' + sendError)
+			AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+			builder.setMessage("Error Sending Txt: " + '\n' + this.getArguments().getString("error"))
 				.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
 					
 					@Override
@@ -193,12 +205,12 @@ public class SendMessageActivity extends BaseActivity
 		}
 	}
 	
-	public class ErrorDialogFragment extends DialogFragment
+	public static class ErrorDialogFragment extends DialogFragment
 	{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState)
 		{
-			AlertDialog.Builder builder = new AlertDialog.Builder(SendMessageActivity.this);
+			AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
 			builder.setMessage("There was an error communicating with the server.  Please try again.")
 				.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
 					

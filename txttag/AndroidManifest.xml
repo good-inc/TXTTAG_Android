@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.txttag.hackathon.android.activities.SendMessageActivity" android:launchMode="singleInstance" />
+        <activity android:name="com.txttag.hackathon.android.activities.SendMessageActivity" android:launchMode="singleInstance" android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name="com.txttag.hackathon.android.activities.RegisterTagActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.ViewMyMessagesActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.SettingsActivity" android:launchMode="singleInstance" />
