@@ -77,7 +77,7 @@ public class TxtTagService
 			Log.d(TAG, "Json Response: " + jsonResponse.toString());
 			
 			return jsonResponse;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			
 			return null;
@@ -129,7 +129,7 @@ public class TxtTagService
 			Log.d(TAG, "Json Response: " + jsonResponse.toString());
 			
 			return jsonResponse;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			
 			return null;
@@ -180,7 +180,7 @@ public class TxtTagService
 				return new ArrayList<Tag>();
 			
 			return jsonResponse.data;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
@@ -238,7 +238,7 @@ public class TxtTagService
 				return new ArrayList<TagMessage>();
 			
 			return jsonResponse.data;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
@@ -290,7 +290,7 @@ public class TxtTagService
 			Log.d(TAG, "Json Response: " + jsonResponse.toString());
 			
 			return jsonResponse;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			
 			return null;
@@ -340,7 +340,7 @@ public class TxtTagService
 			Log.d(TAG, "Json Response: " + jsonResponse.toString());
 			
 			return jsonResponse.success;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
@@ -385,7 +385,7 @@ public class TxtTagService
 			Log.d(TAG, "Json Response: " + jsonResponse.toString());
 			
 			return jsonResponse.data;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
