@@ -17,17 +17,14 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.txttag.hackathon.android.activities.SplashActivity"
-             android:launchMode="singleInstance"
-            android:label="@string/app_name" >
+        <activity android:name="com.txttag.hackathon.android.activities.SplashActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.txttag.hackathon.android.activities.SendMessageActivity" android:launchMode="singleInstance" android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity android:name="com.txttag.hackathon.android.activities.SendMessageActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.RegisterTagActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.ViewMyMessagesActivity" android:launchMode="singleInstance" />
         <activity android:name="com.txttag.hackathon.android.activities.SettingsActivity" android:launchMode="singleInstance" />

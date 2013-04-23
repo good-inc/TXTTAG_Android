@@ -135,8 +135,6 @@ public class RegisterTagActivity extends BaseActivity
 		
 		Log.d(TAG, "tag: " + state);
 		
-		hideKeyboard();
-		
 		this.showProgressDialog("Registering Tag...");
 		
 		(new Thread(new Runnable() {

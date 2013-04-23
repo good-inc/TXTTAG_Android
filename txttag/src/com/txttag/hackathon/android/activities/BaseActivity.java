@@ -1,6 +1,8 @@
 package com.txttag.hackathon.android.activities;
 
 //import com.slidingmenu.lib.SlidingMenu;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.txttag.hackathon.android.R;
@@ -15,7 +17,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
-import android.view.Menu;
 import android.view.inputmethod.InputMethodManager;
 
 public class BaseActivity extends SlidingFragmentActivity 
@@ -50,8 +51,10 @@ public class BaseActivity extends SlidingFragmentActivity
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setFadeDegree(0.35f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		sm.setSlidingEnabled(true);
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 	
 	@Override
@@ -60,6 +63,7 @@ public class BaseActivity extends SlidingFragmentActivity
 		super.onResume();
 		
 		this.getSlidingMenu().showContent();
+		
 	}
 	
 	protected void showProgressDialog(final String msg)
@@ -95,27 +99,22 @@ public class BaseActivity extends SlidingFragmentActivity
 		});
 	}
 	
-	protected void showKeyboard()
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item)
 	{
+		switch(item.getItemId())
+		{
+			case android.R.id.home: this.getSlidingMenu().toggle(true); return true;
+		}
 		
+		return super.onMenuItemSelected(featureId, item);
 	}
 	
-	protected void hideKeyboard()
-	{
-		if(this.getCurrentFocus() == null)
-			return;
-		
-		InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-		
-		inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-	}
-
-	/*
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_splash, menu);
-		return true;
-	}*/
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getSupportMenuInflater().inflate(R.menu.activity_splash, menu);
+//		return true;
+//	}
 
 }

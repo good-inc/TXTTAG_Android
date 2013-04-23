@@ -51,7 +51,7 @@ public class AppMenuListFragment extends ListFragment {
 		adapter.add(new SampleItem("Register A Tag", R.drawable.ic_menu_add, new Intent(this.getActivity(), RegisterTagActivity.class)));
 		adapter.add(new SampleItem("View My Messages", R.drawable.ic_menu_friendslist, new Intent(this.getActivity(), ViewMyMessagesActivity.class)));
 		adapter.add(new SampleItem("Settings", R.drawable.ic_menu_gear, new Intent(this.getActivity(), SettingsActivity.class)));
-		adapter.add(new SampleItem("About", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), AboutActivity.class)));
+		//adapter.add(new SampleItem("About", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), AboutActivity.class)));
 		adapter.add(new SampleItem("FAQ", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), FaqActivity.class)));
 		adapter.add(new SampleItem("Terms", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), TermsActivity.class)));
 		adapter.add(new SampleItem("Feedback", R.drawable.ic_menu_info_details, new Intent(this.getActivity(), FeedbackActivity.class)));

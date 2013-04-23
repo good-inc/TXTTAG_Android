@@ -15,10 +15,12 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import com.txttag.hackathon.android.R;
@@ -69,8 +71,6 @@ public class SendMessageActivity extends BaseActivity
 	{
 		super.onResume();
 		
-		
-		
 		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		try {
 			List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
@@ -81,6 +81,8 @@ public class SendMessageActivity extends BaseActivity
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//this.hideKeyboard();
 	}
 	
 	public void sendTxt(View view)
@@ -92,8 +94,6 @@ public class SendMessageActivity extends BaseActivity
 		final String message = messageInput.getText().toString();
 		
 		Log.d(TAG, "State: " + state);
-		
-		hideKeyboard();
 		
 		this.showProgressDialog("Sending Message...");
 		
