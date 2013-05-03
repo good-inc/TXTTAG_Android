@@ -77,8 +77,9 @@ public class SendMessageActivity extends BaseActivity
 			//Log.d(TAG, "Address: " + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea());
 			//Log.d(TAG, "State index: " + AppUtils.getStateIndexFromName(addresses.get(0).getAdminArea()));
 			stateSpinner.setSelection(AppUtils.getStateIndexFromName(addresses.get(0).getAdminArea()));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			Log.w(TAG, "The following exception may just be a result of not having access to location services.");
 			e.printStackTrace();
 		}
 		

@@ -122,6 +122,9 @@ public class UserInfo
 	
 	public static Tag getActiveTag()
 	{
+		if(activeTag == null)
+			return null;
+		
 		return activeTag.clone();
 	}
 	
