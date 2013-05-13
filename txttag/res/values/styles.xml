@@ -12,13 +12,16 @@
         -->
     </style>
 
+    <!-- Theme Just For Splash -->
+    <style name="NoActionBar" parent="Theme.Sherlock.Light.DarkActionBar">
+        <!-- This is empty for early versions without Actionbars -->
+    </style>
+    
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.Sherlock.Light.DarkActionBar">
         <item name="homeAsUpIndicator">@drawable/new_indicator</item>
-        <item name="android:homeAsUpIndicator">@drawable/new_indicator</item>
         
         <item name="actionBarStyle">@style/Actionbar</item>
-        <item name="android:actionBarStyle">@style/Actionbar</item>
         
         <item name="android:windowBackground">@color/window_bk_color</item>
         <item name="android:textSize">22sp</item>
@@ -49,5 +52,10 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#0044FF</item>
     </style>
+    
+    <!-- AlertDialog text color fix thanks to Shawn Castrianni, see: http://groups.google.com/group/android-developers/browse_thread/thread/f0b34621d3a70c4b -->
+	<style name="AboutDialog" parent="@android:style/Theme.Dialog">
+		<item name="android:textColor">?android:attr/textColorPrimaryDisableOnly</item>
+	</style>
 
 </resources>

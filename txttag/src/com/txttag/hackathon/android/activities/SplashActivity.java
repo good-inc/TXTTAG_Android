@@ -3,13 +3,14 @@ import com.txttag.hackathon.android.R;
 import com.txttag.hackathon.android.app.TxtTagStats;
 import com.txttag.hackathon.android.app.UserInfo;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 public class SplashActivity extends Activity
 {
-
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{

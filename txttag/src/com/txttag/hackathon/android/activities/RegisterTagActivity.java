@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -78,7 +79,7 @@ public class RegisterTagActivity extends BaseActivity
 			//Log.d(TAG, "Address: " + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea());
 			//Log.d(TAG, "State index: " + AppUtils.getStateIndexFromName(addresses.get(0).getAdminArea()));
 			stateSpinner.setSelection(AppUtils.getStateIndexFromName(addresses.get(0).getAdminArea()));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -96,10 +97,13 @@ public class RegisterTagActivity extends BaseActivity
 	
 	private void promptForEmail()
 	{
-		View emailForm = getLayoutInflater().inflate(R.layout.alert_email_required, null);
+		// Fix for bad text color in popup (also, note, can't fix by assigning color in layout because platforms alter theme colors on popups)
+		ContextThemeWrapper themeWrapper = new ContextThemeWrapper(this, R.style.AboutDialog);
+		
+		View emailForm = View.inflate(themeWrapper, R.layout.alert_email_required, null);//getLayoutInflater().inflate(R.layout.alert_email_required, null);
 		final EditText emailInput = (EditText)emailForm.findViewById(R.id.email);
 		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(themeWrapper);
 		builder.setTitle("Email Required")
 		.setView(emailForm)
 		.setPositiveButton("Ok", new OnClickListener() {

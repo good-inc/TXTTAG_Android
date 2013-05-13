@@ -115,7 +115,6 @@ public class SendMessageActivity extends BaseActivity
 						if(response != null && response.success)
 						{
 							// successful
-							stateSpinner.setSelection(0);
 							plateInput.setText("");
 							messageInput.setText("");
 							showSuccessMessage();

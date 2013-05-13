@@ -35,6 +35,7 @@ public class BaseActivity extends SlidingFragmentActivity
 		super.onCreate(savedInstanceState);
 		
 		setTitle(title);
+		getSupportActionBar().setIcon(R.drawable.menu_icon);
 		
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
@@ -55,6 +56,7 @@ public class BaseActivity extends SlidingFragmentActivity
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
+		
 	}
 	
 	@Override
